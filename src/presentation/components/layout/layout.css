@@ -1,0 +1,10 @@
+header,
+main .center,
+footer > div {
+	width: min(90vw, 1280px);
+	margin-inline: auto !important;
+}
+
+header {
+	margin-top: 3.5rem;
+}

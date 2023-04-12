@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "next/core-web-vitals",
+    "plugin:react/recommended",
+    "standard-with-typescript",
+    "prettier"
+  ],
+  "plugins": [
+    "react"
+  ],
+  "rules": {
+    "import/prefer-default-export": "off",
+    "react/jsx-no-bind": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/react-in-jsx-scope": "off"
+  }
+}

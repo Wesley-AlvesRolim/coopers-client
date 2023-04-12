@@ -1,0 +1,42 @@
+.footer {
+  padding-top: 4.5rem;
+  color: var(--white);
+  text-align: center;
+  position: relative;
+  background-image: url(/black-bg.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  font-weight: 600;
+  font-size: 1.5rem;
+  line-height: 20px;
+}
+
+.footer > div {
+	width: fit-content;
+	position: relative;
+	padding-bottom: 4.25rem;
+}
+
+.footer > div::after {
+	content: '';
+	height: 2.5rem;
+	width: 100%;
+	background-color: var(--green-500);
+	position: absolute;
+	left: 0;
+	bottom: 0;
+}
+
+.footer h5 {
+  margin-bottom: 1.75rem;
+}
+
+.footer address {
+  margin-bottom: 1.25rem;
+  font-style: normal;
+}
+
+.footer small {
+  font-weight: 500;
+  font-size: 0.9rem;
+}
