@@ -9,22 +9,24 @@
   font-weight: 600;
   font-size: 1.5rem;
   line-height: 20px;
+  overflow-y: hidden;
 }
 
 .footer > div {
-	width: fit-content;
-	position: relative;
-	padding-bottom: 4.25rem;
+  width: min(100%, 500px);
+  position: relative;
+  padding-bottom: 4.25rem;
 }
 
 .footer > div::after {
-	content: '';
-	height: 2.5rem;
-	width: 100%;
-	background-color: var(--green-500);
-	position: absolute;
-	left: 0;
-	bottom: 0;
+  content: '';
+  height: 2.5rem;
+  width: 100%;
+  background-color: var(--green-500);
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  transform: rotate(-1deg) translateY(5px);
 }
 
 .footer h5 {
