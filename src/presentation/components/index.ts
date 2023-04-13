@@ -1,6 +1,10 @@
 export { default as Button } from './button/button';
+export { default as Checkbox } from './checkbox/checkbox';
 export { default as Link } from './link/link';
 export { default as Footer } from './footer/footer';
 export { default as Hero } from './hero/hero';
 export { default as LayoutComponent } from './layout/layout-component';
+export { default as TodoListSection } from './todo-list-section/todo-list-section';
+export { default as TodoListCard } from './todo-list-card/todo-list-card';
+export { default as Task } from './task/task';
 export { default as Header } from './header/header';
