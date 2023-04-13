@@ -1,10 +1,15 @@
 'use client';
+import { useCallback, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { Button } from '@/presentation/components';
+import { Button, InputWithLabel } from '@/presentation/components';
 import './header.css';
+import AuthModal from '../auth-modal/auth-modal';
 
 const Header = (): JSX.Element => {
   const isTablet = useMediaQuery({ minWidth: 768 });
+  const [isOpen, setIsOpen] = useState(false);
+  const openModal = useCallback(() => setIsOpen(true), []);
+  const closeModal = useCallback(() => setIsOpen(false), []);
 
   return (
     <header className="header">
@@ -13,9 +18,10 @@ const Header = (): JSX.Element => {
       ) : (
         <img src="/logo-icon.svg" alt="Coopers company logo" />
       )}
-      <Button variant="black" size="small">
-        entrar
+      <Button variant="black" onClick={openModal} size="small">
+        sign in
       </Button>
+      <AuthModal isOpen={isOpen} closeModal={closeModal} />
     </header>
   );
 };
