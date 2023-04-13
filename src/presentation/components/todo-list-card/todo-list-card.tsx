@@ -1,7 +1,6 @@
 'use client';
-import { Button, Checkbox } from '@/presentation/components';
+import { Button, Checkbox, Task } from '@/presentation/components';
 import './todo-list-card.css';
-import Task from '../task/task';
 
 interface TodoListProps {
   title: string;

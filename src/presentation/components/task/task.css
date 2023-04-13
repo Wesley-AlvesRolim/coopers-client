@@ -1,8 +1,8 @@
 
 .task {
   display: grid;
-  grid-template-columns: minmax(1fr, 30px) 1fr;
-  grid-template-rows: 2;
+  grid-template-columns: 30px 1fr;
+  grid-template-rows: repeat(2, 1fr);
   gap: 1rem;
 }
 
@@ -31,7 +31,7 @@
 @media (min-width: 768px) {
   .task {
     grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: 1;
+    grid-template-rows: 1fr;
   }
 
   .task button {

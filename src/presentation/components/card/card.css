@@ -1,0 +1,44 @@
+.card {
+  width: 22.5rem;
+  border-radius: 16px;
+  background-color: var(--white);
+  box-shadow: var(--shadow-1);
+  position: relative;
+  z-index: 9999;
+}
+
+.card svg {
+  height: 3.5rem;
+  position: absolute;
+  top: 172px;
+  right: 20px;
+}
+
+.card .content {
+  padding: 2rem;
+}
+
+.card .thumbnail {
+  height: 200px;
+  width: 100%;
+  border-radius: 16px 16px 0 0;
+  object-fit: cover;
+}
+
+.card ul:has(> .card-label) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.card .description {
+  margin: 1.125rem 0;
+  font-weight: 500;
+  font-size: 1.25rem;
+}
+
+.card a {
+  font-weight: 700;
+  color: var(--green-500);
+  font-family: var(--font-soleil-bold);
+}

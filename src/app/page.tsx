@@ -1,4 +1,5 @@
 import {
+  CardsSection,
   Hero,
   LayoutComponent,
   TodoListSection,
@@ -9,6 +10,7 @@ export default function Home() {
     <LayoutComponent>
       <Hero />
       <TodoListSection />
+      <CardsSection />
     </LayoutComponent>
   );
 }
