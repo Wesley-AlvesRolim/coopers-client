@@ -17,7 +17,7 @@ const CardsSection = (): JSX.Element => {
                 alt: 'Random generated image from unsplash',
               }}
               description="Organize your daily job enhance your life performance"
-              labels={['function', 'funtion' + index]}
+              labels={[`function ${index}`]}
             />
           </div>
         ))}

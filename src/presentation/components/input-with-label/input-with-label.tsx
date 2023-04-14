@@ -1,4 +1,4 @@
-import { InputHTMLAttributes, useId } from 'react';
+import { type InputHTMLAttributes, useId } from 'react';
 import { Input } from '@/presentation/components';
 import './input-with-label.css';
 
@@ -15,7 +15,7 @@ const InputWithLabel = ({
 
   return (
     <div className="input-with-label-container">
-      <label htmlFor={id}>{required ? `${label}*` : label}</label>
+      <label htmlFor={id}>{required ?? false ? `${label}*` : label}</label>
       <Input id={id} required={required} {...inputProps} />
     </div>
   );

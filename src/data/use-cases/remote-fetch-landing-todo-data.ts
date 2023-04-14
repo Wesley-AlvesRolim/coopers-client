@@ -1,5 +1,8 @@
-import { HttpClient } from '@/data/protocols';
-import { FetchLandingTodoData, LandingTodoData } from '@/domain/use-cases';
+import { type HttpClient } from '@/data/protocols';
+import {
+  type FetchLandingTodoData,
+  type LandingTodoData,
+} from '@/domain/use-cases';
 
 export class RemoteFetchLandingTodoData implements FetchLandingTodoData {
   constructor(
@@ -7,8 +10,8 @@ export class RemoteFetchLandingTodoData implements FetchLandingTodoData {
     private readonly httpClient: HttpClient
   ) {}
 
-  get(): Promise<LandingTodoData[]> {
-    const httpResponse = this.httpClient.request({
+  async get(): Promise<LandingTodoData[]> {
+    const httpResponse = await this.httpClient.request({
       url: this.url,
       method: 'GET',
     });

@@ -1,4 +1,3 @@
-import { useCallback, useState } from 'react';
 import { Button, InputWithLabel } from '@/presentation/components';
 import PureModal from 'react-pure-modal';
 import 'react-pure-modal/dist/react-pure-modal.min.css';
