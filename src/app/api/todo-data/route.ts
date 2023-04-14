@@ -1,5 +1,3 @@
-import { type NextApiRequest, type NextApiResponse } from 'next';
-
 const todoData = [
   {
     id: '1',
@@ -28,6 +26,6 @@ const todoData = [
   },
 ];
 
-export function GET(_req: NextApiRequest, res: NextApiResponse) {
+export function GET() {
   return new Response(JSON.stringify(todoData));
 }
