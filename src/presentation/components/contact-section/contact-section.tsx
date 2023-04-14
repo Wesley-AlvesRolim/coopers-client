@@ -1,4 +1,8 @@
-import { Button, InputWithLabel } from '@/presentation/components';
+import {
+  Button,
+  InputWithLabel,
+  TextareaWithLabel,
+} from '@/presentation/components';
 import './contact-section.css';
 
 const ContactSection = (): JSX.Element => {
@@ -32,7 +36,7 @@ const ContactSection = (): JSX.Element => {
           label="Telephone"
           placeholder="(  ) ____-____"
         />
-        <InputWithLabel
+        <TextareaWithLabel
           required
           label="Message"
           placeholder="Type what you want to say to us"

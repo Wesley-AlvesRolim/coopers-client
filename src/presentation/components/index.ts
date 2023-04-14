@@ -15,4 +15,6 @@ export { default as LogoIcon } from './logo-icon/logo-icon';
 export { default as TodoListSection } from './todo-list-section/todo-list-section';
 export { default as TodoListCard } from './todo-list-card/todo-list-card';
 export { default as Task } from './task/task';
+export { default as Textarea } from './textarea/textarea';
+export { default as TextareaWithLabel } from './textarea-with-label/textarea-with-label';
 export { default as Header } from './header/header';
