@@ -1,7 +1,20 @@
+'use client';
+import { useEffect } from 'react';
 import { TodoListCard } from '@/presentation/components';
+import { useTodo } from '@/presentation/store';
 import './todo-list-section.css';
 
 const TodoListSection = (): JSX.Element => {
+  const fetchData = useTodo((state) => state.fetch);
+
+  const doneTasksLength = useTodo(
+    (state) => state.filterTasksByIsDone(true).length
+  );
+
+  useEffect(() => {
+    void fetchData();
+  }, [fetchData]);
+
   return (
     <section id="todo-list">
       <div id="todo-list-section-title">
@@ -23,7 +36,7 @@ const TodoListSection = (): JSX.Element => {
           title="Done"
           description={
             <>
-              Congratulions! <span>You have done 5 tasks</span>
+              Congratulions! <span>You have done {doneTasksLength} tasks</span>
             </>
           }
           listState="done"
