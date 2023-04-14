@@ -5,6 +5,7 @@ export { default as Checkbox } from './checkbox/checkbox';
 export { default as ContactSection } from './contact-section/contact-section';
 export { default as Input } from './input/input';
 export { default as InputWithLabel } from './input-with-label/input-with-label';
+export { default as IsVisible } from './is-visible/is-visible';
 export { default as Link } from './link/link';
 export { default as Footer } from './footer/footer';
 export { default as Hero } from './hero/hero';
