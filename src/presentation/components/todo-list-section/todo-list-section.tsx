@@ -1,15 +1,25 @@
 'use client';
 import { useEffect } from 'react';
-import { TodoListCard } from '@/presentation/components';
+import { DragDropContext, type DropResult } from 'react-beautiful-dnd';
+import { Droppable, TodoListCard } from '@/presentation/components';
 import { useTodo } from '@/presentation/store';
 import './todo-list-section.css';
 
 const TodoListSection = (): JSX.Element => {
-  const fetchData = useTodo((state) => state.fetch);
+  const {
+    fetch: fetchData,
+    editTaskState,
+    filterTasksByIsDone,
+  } = useTodo((state) => state);
 
-  const doneTasksLength = useTodo(
-    (state) => state.filterTasksByIsDone(true).length
-  );
+  const doneTasksLength = filterTasksByIsDone(true).length;
+
+  const updateTaskState = (result: DropResult) => {
+    editTaskState(
+      result.draggableId,
+      result.destination?.droppableId === 'done'
+    );
+  };
 
   useEffect(() => {
     void fetchData();
@@ -26,22 +36,29 @@ const TodoListSection = (): JSX.Element => {
           </p>
         </div>
       </div>
-      <div id="todo-cards">
-        <TodoListCard
-          title="To-do"
-          description="Take a breath. Start doing."
-          listState="todo"
-        />
-        <TodoListCard
-          title="Done"
-          description={
-            <>
-              Congratulions! <span>You have done {doneTasksLength} tasks</span>
-            </>
-          }
-          listState="done"
-        />
-      </div>
+      <DragDropContext onDragEnd={updateTaskState}>
+        <div id="todo-cards">
+          <Droppable droppableId="todo">
+            <TodoListCard
+              title="To-do"
+              description="Take a breath. Start doing."
+              listState="todo"
+            />
+          </Droppable>
+          <Droppable droppableId="done">
+            <TodoListCard
+              title="Done"
+              description={
+                <>
+                  Congratulions!{' '}
+                  <span>You have done {doneTasksLength} tasks</span>
+                </>
+              }
+              listState="done"
+            />
+          </Droppable>
+        </div>
+      </DragDropContext>
     </section>
   );
 };

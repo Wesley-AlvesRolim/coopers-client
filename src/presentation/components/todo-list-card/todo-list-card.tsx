@@ -1,79 +1,50 @@
 'use client';
-import { type FocusEvent } from 'react';
-import { Button, Checkbox, Task } from '@/presentation/components';
+import { Fragment } from 'react';
+import { Button, Draggable, IsVisible, Task } from '@/presentation/components';
 import { useTodo } from '@/presentation/store';
+import NewTaskItem from './new-task-item';
 import './todo-list-card.css';
 
-interface TodoListProps {
+interface TodoListCardProps {
   title: string;
   description: React.ReactNode;
   listState: 'todo' | 'done';
 }
 
-const TodoList = ({
+const TodoListCard = ({
   title,
   description,
   listState,
-}: TodoListProps): JSX.Element => {
-  const {
-    addTask: addTaskToStore,
-    editTask,
-    removeTask,
-    removeAllTasksByState,
-    filterTasksByIsDone,
-  } = useTodo((state) => state);
+}: TodoListCardProps): JSX.Element => {
+  const { removeAllTasksByState, filterTasksByIsDone } = useTodo(
+    (state) => state
+  );
   const tasks = filterTasksByIsDone(listState === 'done');
-
-  const initializeAddTask = () => {
-    addTaskToStore({
-      description: '',
-      isDone: false,
-    });
-  };
-
-  const addTask = (event: FocusEvent<HTMLInputElement>, id: string) => {
-    if (event.target.value === '') {
-      removeTask(id);
-      return;
-    }
-
-    editTask({
-      id,
-      description: event.target.value,
-      isDone: false,
-    });
-  };
 
   return (
     <div id="todo-list-card" className={`${listState}`}>
       <h3>{title}</h3>
       <p>{description}</p>
       <ul>
-        {tasks.map((task) =>
-          task.description !== '' ? (
-            <Task
-              id={task.id}
-              title={task.description}
-              key={task.id}
-              listState={listState}
-            />
-          ) : (
-            listState === 'todo' && (
-              <li className="task">
-                <Checkbox className={`${listState}`} />
-                <input
-                  className="task-description"
-                  type="text"
-                  placeholder="Type your task..."
-                  onFocus={initializeAddTask}
-                  onBlur={(event) => {
-                    addTask(event, task.id);
-                  }}
+        {tasks.map((task, index) => (
+          <Fragment key={task.id}>
+            <IsVisible condition={task.description !== ''}>
+              <Draggable draggableId={task.id} index={index}>
+                <Task
+                  id={task.id}
+                  key={task.id}
+                  title={task.description}
+                  listState={listState}
                 />
-              </li>
-            )
-          )
-        )}
+              </Draggable>
+            </IsVisible>
+            <IsVisible
+              condition={task.description === '' && listState === 'todo'}
+            >
+              <NewTaskItem taskId={task.id} listState={listState} />
+            </IsVisible>
+          </Fragment>
+        ))}
       </ul>
       <Button
         variant="black"
@@ -88,4 +59,4 @@ const TodoList = ({
   );
 };
 
-export default TodoList;
+export default TodoListCard;

@@ -59,6 +59,10 @@
   gap: 2.5rem;
 }
 
+#todo-cards > div {
+  width: min(90vw, 380px);
+}
+
 @media (min-width: 768px) {
   #todo-list-section-title::before {
     transform: scale(4) skew(-86deg, 0deg);
