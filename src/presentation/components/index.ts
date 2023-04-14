@@ -3,6 +3,7 @@ export { default as CardsSection } from './cards-section/cards-section';
 export { default as Card } from './card/card';
 export { default as Checkbox } from './checkbox/checkbox';
 export { default as ContactSection } from './contact-section/contact-section';
+export * from './drag-and-drop';
 export { default as Input } from './input/input';
 export { default as InputWithLabel } from './input-with-label/input-with-label';
 export { default as IsVisible } from './is-visible/is-visible';
