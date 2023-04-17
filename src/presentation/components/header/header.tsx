@@ -4,8 +4,10 @@ import { useMediaQuery } from 'react-responsive';
 import { Button } from '@/presentation/components';
 import './header.css';
 import AuthModal from '../auth-modal/auth-modal';
+import { useAuth } from '@/presentation/store';
 
 const Header = (): JSX.Element => {
+  const { isAuthenticated, logout } = useAuth((state) => state);
   const isTablet = useMediaQuery({ minWidth: 768 });
   const [isOpen, setIsOpen] = useState(false);
   const openModal = useCallback(() => {
@@ -22,9 +24,15 @@ const Header = (): JSX.Element => {
       ) : (
         <img src="/logo-icon.svg" alt="Coopers company logo" />
       )}
-      <Button variant="black" onClick={openModal} size="small">
-        sign in
-      </Button>
+      {isAuthenticated ? (
+        <Button variant="black" onClick={logout} size="small">
+          sign out
+        </Button>
+      ) : (
+        <Button variant="black" onClick={openModal} size="small">
+          sign in
+        </Button>
+      )}
       <AuthModal isOpen={isOpen} closeModal={closeModal} />
     </header>
   );

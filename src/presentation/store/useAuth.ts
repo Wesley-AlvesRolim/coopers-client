@@ -1,24 +1,38 @@
 import { create } from 'zustand';
+import { getCookie, setCookie, deleteCookie } from 'cookies-next';
 import { type LoginRequest, type LoginResponse } from '@/domain/use-cases';
 import { makeLogin } from '@/main/factories';
 
 interface AuthStore {
-  userData: LoginResponse;
+  userData: Partial<LoginResponse>;
+  isAuthenticated: boolean;
   login: (params: LoginRequest) => Promise<void>;
+  logout: () => void;
 }
 
 const fetchLogin = makeLogin();
 
 const useAuth = create<AuthStore>((set) => ({
-  userData: {} as any as LoginResponse,
+  userData: getCookie('coppers:user') ?? {},
+  isAuthenticated: getCookie('coppers:user') !== null,
 
   login: async (params) => {
     const user = await fetchLogin.execute({ ...params });
 
-    localStorage.setItem('coppers:user', JSON.stringify(user));
+    setCookie('coppers:user', user);
     set((store) => ({
       ...store,
+      isAuthenticated: true,
       userData: { ...user },
+    }));
+  },
+
+  logout: () => {
+    deleteCookie('coppers:user');
+    set((store) => ({
+      ...store,
+      isAuthenticated: false,
+      userData: {},
     }));
   },
 }));
