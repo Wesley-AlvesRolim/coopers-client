@@ -1,6 +1,8 @@
 export interface HttpClientParams {
   url: string;
-  method: 'GET';
+  method: 'GET' | 'POST';
+  body?: BodyInit | null;
+  headers?: Headers;
 }
 
 export interface HttpClient {
