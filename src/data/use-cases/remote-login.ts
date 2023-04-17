@@ -23,6 +23,10 @@ export class RemoteLogin implements Login {
       headers,
     });
 
+    if (Number(user?.statusCode) >= 400) {
+      throw new Error(user.message);
+    }
+
     return user;
   }
 }
