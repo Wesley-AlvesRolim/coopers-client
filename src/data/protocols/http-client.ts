@@ -1,6 +1,6 @@
 export interface HttpClientParams {
   url: string;
-  method: 'GET' | 'POST';
+  method: 'GET' | 'POST' | 'PUT' | 'DELETE';
   body?: BodyInit | null;
   headers?: Headers;
 }
