@@ -8,6 +8,10 @@ export class FetchAdapter implements HttpClient {
       headers: params.headers,
     });
 
-    return await response.json();
+    try {
+      return await response.json();
+    } catch {
+      return response;
+    }
   }
 }
