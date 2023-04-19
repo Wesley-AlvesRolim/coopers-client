@@ -3,9 +3,11 @@
 }
 
 #todo-list-section-title {
+  width: 100%;
   position: relative;
   color: var(--white);
   text-align: center;
+  overflow: hidden;
 }
 
 #todo-list-section-title div {
