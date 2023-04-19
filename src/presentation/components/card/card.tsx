@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { LogoIcon } from '@/presentation/components';
 import CardLabel from './card-label/card-label';
 import './card.css';
@@ -17,7 +18,13 @@ const Card = ({ thumbnail, labels, description }: CardProps): JSX.Element => {
   return (
     <div className="card">
       <LogoIcon />
-      <img className="thumbnail" src={thumbnail.url} alt={thumbnail.alt} />
+      <Image
+        className="thumbnail"
+        width={200}
+        height={200}
+        src={thumbnail.url}
+        alt={thumbnail.alt}
+      />
       <div className="content">
         <ul>
           {labels.map((label) => (

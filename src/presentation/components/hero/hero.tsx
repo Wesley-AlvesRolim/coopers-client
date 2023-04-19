@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { Link } from '@/presentation/components';
 import './hero.css';
 
@@ -16,12 +17,23 @@ const Hero = (): JSX.Element => {
       </div>
 
       <div id="hero-image">
-        <img src="/house-image.svg" alt="Image inside house" />
+        <Image
+          src="/house-image.svg"
+          alt="Image inside house"
+          width={443}
+          height={481.52}
+          priority
+        />
       </div>
 
       <div id="scroll-down">
         <a href="#todo-list">
-          <img src="/icon-scroll.svg" alt="scroll down icon" />
+          <Image
+            src="/icon-scroll.svg"
+            alt="scroll down icon"
+            width={24}
+            height={40}
+          />
         </a>
       </div>
     </section>

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
+import Image from 'next/image';
 import { useForm } from 'react-hook-form';
 import toast, { Toaster } from 'react-hot-toast';
 import { Button, InputWithLabel } from '@/presentation/components';
@@ -34,8 +35,10 @@ const AuthModal = ({ isOpen, closeModal }: AuthModalProps): JSX.Element => {
       <Toaster />
       <PureModal isOpen={isOpen} onClose={closeModal} closeButton="close">
         <>
-          <img
+          <Image
             src="/login-image.svg"
+            width={231}
+            height={231}
             alt="Woman interacting with floating geometric figures"
           />
           <AuthModalHeader />
