@@ -12,9 +12,19 @@ interface AuthStore {
 
 const fetchLogin = makeLogin();
 
+const getParsedUserData = (): LoginResponse | null => {
+  if (typeof window !== 'undefined') {
+    const userDataCookie = getCookie('coppers:user')?.toString();
+    return typeof userDataCookie === 'string'
+      ? JSON.parse(userDataCookie)
+      : null;
+  }
+  return null;
+};
+
 const useAuth = create<AuthStore>((set) => ({
-  userData: getCookie('coppers:user') ?? {},
-  isAuthenticated: getCookie('coppers:user') !== null,
+  userData: getParsedUserData() ?? {},
+  isAuthenticated: getParsedUserData() !== null,
 
   login: async (params) => {
     const user = await fetchLogin.execute({ ...params });
