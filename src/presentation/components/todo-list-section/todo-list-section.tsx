@@ -2,28 +2,29 @@
 import { useEffect } from 'react';
 import { DragDropContext, type DropResult } from 'react-beautiful-dnd';
 import { Droppable, TodoListCard } from '@/presentation/components';
-import { useTodo } from '@/presentation/store';
+import { useAuth, useTodo } from '@/presentation/store';
 import './todo-list-section.css';
 
 const TodoListSection = (): JSX.Element => {
+  const isAuthenticated = useAuth((state) => state.isAuthenticated);
   const {
     fetch: fetchData,
     editTaskState,
     filterTasksByIsDone,
-  } = useTodo((state) => state);
+  } = useTodo()((state) => state);
 
   const doneTasksLength = filterTasksByIsDone(true).length;
 
   const updateTaskState = (result: DropResult) => {
-    editTaskState(
-      result.draggableId,
+    void editTaskState(
+      Number(result.draggableId),
       result.destination?.droppableId === 'done'
     );
   };
 
   useEffect(() => {
     void fetchData();
-  }, [fetchData]);
+  }, [fetchData, isAuthenticated]);
 
   return (
     <section id="todo-list">

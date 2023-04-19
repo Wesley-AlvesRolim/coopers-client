@@ -1,6 +1,6 @@
 import { type FocusEvent } from 'react';
-import { Checkbox } from '@/presentation/components';
-import { useTodo } from '@/presentation/store';
+import { Checkbox, Textarea } from '@/presentation/components';
+import { useAuth, useTodo } from '@/presentation/store';
 
 interface NewTaskItemProps {
   taskId: string;
@@ -12,38 +12,48 @@ const NewTaskItem = ({ taskId, listState }: NewTaskItemProps): JSX.Element => {
     addTask: addTaskToStore,
     editTask,
     removeTask,
-  } = useTodo((state) => state);
+  } = useTodo()((state) => state);
+  const isAuthenticated = useAuth((state) => state.isAuthenticated);
 
   const initializeAddTask = () => {
-    addTaskToStore({
+    void addTaskToStore({
       description: '',
       isDone: false,
     });
   };
 
-  const addTask = (event: FocusEvent<HTMLInputElement>, id: string) => {
+  const addTask = async (
+    event: FocusEvent<HTMLTextAreaElement>,
+    id: string
+  ) => {
     if (event.target.value === '') {
-      removeTask(id);
+      await removeTask(Number(id), true);
       return;
     }
 
-    editTask({
-      id,
-      description: event.target.value,
-      isDone: false,
-    });
+    if (isAuthenticated) {
+      await addTaskToStore({
+        description: event.target.value,
+        isDone: false,
+      });
+    } else {
+      await editTask({
+        id: Number(id),
+        description: event.target.value,
+        isDone: false,
+      });
+    }
   };
 
   return (
     <li className="task">
       <Checkbox className={`${listState}`} />
-      <input
+      <Textarea
         className="task-description"
-        type="text"
         placeholder="Type your task..."
         onFocus={initializeAddTask}
         onBlur={(event) => {
-          addTask(event, taskId);
+          void addTask(event, taskId);
         }}
       />
     </li>

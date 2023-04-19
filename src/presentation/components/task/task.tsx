@@ -10,25 +10,25 @@ interface TaskProps {
 }
 
 const Task = ({ id, title, listState }: TaskProps): JSX.Element => {
-  const { editTask, removeTask } = useTodo((state) => state);
+  const { editTask, removeTask } = useTodo()((state) => state);
 
   const updateTitle = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     if (value === '') {
-      removeTask(id);
+      void removeTask(Number(id));
       return;
     }
 
-    editTask({
-      id,
+    void editTask({
+      id: Number(id),
       description: value,
       isDone: listState === 'done',
     });
   };
 
   const updateTaskState = (event: ChangeEvent<HTMLInputElement>) => {
-    editTask({
-      id,
+    void editTask({
+      id: Number(id),
       description: title,
       isDone: event.target.checked,
     });
@@ -49,7 +49,7 @@ const Task = ({ id, title, listState }: TaskProps): JSX.Element => {
       />
       <button
         onClick={() => {
-          removeTask(id);
+          void removeTask(Number(id));
         }}
       >
         delete

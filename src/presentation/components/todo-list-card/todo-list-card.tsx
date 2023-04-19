@@ -1,7 +1,7 @@
 'use client';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import { Button, Draggable, IsVisible, Task } from '@/presentation/components';
-import { useTodo } from '@/presentation/store';
+import { useAuth, useTodo } from '@/presentation/store';
 import NewTaskItem from './new-task-item';
 import './todo-list-card.css';
 
@@ -16,10 +16,15 @@ const TodoListCard = ({
   description,
   listState,
 }: TodoListCardProps): JSX.Element => {
-  const { removeAllTasksByState, filterTasksByIsDone } = useTodo(
+  const isAuthenticated = useAuth((state) => state.isAuthenticated);
+  const { removeAllTasksByState, filterTasksByIsDone, fetch } = useTodo()(
     (state) => state
   );
   const tasks = filterTasksByIsDone(listState === 'done');
+
+  useEffect(() => {
+    void fetch();
+  }, [isAuthenticated, fetch]);
 
   return (
     <div id="todo-list-card" className={`${listState}`}>
@@ -29,9 +34,9 @@ const TodoListCard = ({
         {tasks.map((task, index) => (
           <Fragment key={task.id}>
             <IsVisible condition={task.description !== ''}>
-              <Draggable draggableId={task.id} index={index}>
+              <Draggable draggableId={String(task.id)} index={index}>
                 <Task
-                  id={task.id}
+                  id={String(task.id)}
                   key={task.id}
                   title={task.description}
                   listState={listState}
@@ -41,7 +46,7 @@ const TodoListCard = ({
             <IsVisible
               condition={task.description === '' && listState === 'todo'}
             >
-              <NewTaskItem taskId={task.id} listState={listState} />
+              <NewTaskItem taskId={String(task.id)} listState={listState} />
             </IsVisible>
           </Fragment>
         ))}
@@ -50,7 +55,7 @@ const TodoListCard = ({
         variant="black"
         size="large"
         onClick={() => {
-          removeAllTasksByState(listState === 'done');
+          void removeAllTasksByState(listState === 'done');
         }}
       >
         erase all
