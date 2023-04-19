@@ -1,5 +1,5 @@
 import { type FocusEvent } from 'react';
-import { Checkbox, Textarea } from '@/presentation/components';
+import { Checkbox, Input } from '@/presentation/components';
 import { useAuth, useTodo } from '@/presentation/store';
 
 interface NewTaskItemProps {
@@ -22,10 +22,7 @@ const NewTaskItem = ({ taskId, listState }: NewTaskItemProps): JSX.Element => {
     });
   };
 
-  const addTask = async (
-    event: FocusEvent<HTMLTextAreaElement>,
-    id: string
-  ) => {
+  const addTask = async (event: FocusEvent<HTMLInputElement>, id: string) => {
     if (event.target.value === '') {
       await removeTask(Number(id), true);
       return;
@@ -48,7 +45,7 @@ const NewTaskItem = ({ taskId, listState }: NewTaskItemProps): JSX.Element => {
   return (
     <li className="task">
       <Checkbox className={`${listState}`} />
-      <Textarea
+      <Input
         className="task-description"
         placeholder="Type your task..."
         onFocus={initializeAddTask}
