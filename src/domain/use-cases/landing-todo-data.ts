@@ -1,5 +1,5 @@
 export interface LandingTodoData {
-  id: string;
+  id: number;
   description: string;
   isDone: boolean;
 }
