@@ -1,16 +1,22 @@
 import { create } from 'zustand';
 import { getCookie, setCookie, deleteCookie } from 'cookies-next';
-import { type LoginRequest, type LoginResponse } from '@/domain/use-cases';
-import { makeLogin } from '@/main/factories';
+import {
+  type CreateAccountRequest,
+  type LoginRequest,
+  type LoginResponse,
+} from '@/domain/use-cases';
+import { makeCreateAccount, makeLogin } from '@/main/factories';
 
 interface AuthStore {
   userData: Partial<LoginResponse>;
   isAuthenticated: boolean;
+  createAccount: (params: CreateAccountRequest) => Promise<void>;
   login: (params: LoginRequest) => Promise<void>;
   logout: () => void;
 }
 
 const fetchLogin = makeLogin();
+const fetchAccountCreation = makeCreateAccount();
 
 const getParsedUserData = (): LoginResponse | null => {
   if (typeof window !== 'undefined') {
@@ -35,6 +41,10 @@ const useAuth = create<AuthStore>((set) => ({
       isAuthenticated: true,
       userData: { ...user },
     }));
+  },
+
+  createAccount: async (params) => {
+    await fetchAccountCreation.execute({ ...params });
   },
 
   logout: () => {
