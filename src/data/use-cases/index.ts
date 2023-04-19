@@ -1,4 +1,5 @@
 export * from './remote-add-task';
+export * from './remote-create-account';
 export * from './remote-login';
 export * from './remote-fetch-landing-todo-data';
 export * from './remote-read-tasks';
