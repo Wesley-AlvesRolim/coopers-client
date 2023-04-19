@@ -1,10 +1,14 @@
 import './auth-modal-header.css';
 
-const AuthModalHeader = (): JSX.Element => {
+interface AuthModalHeaderProps {
+  page: string;
+}
+
+const AuthModalHeader = ({ page }: AuthModalHeaderProps): JSX.Element => {
   return (
     <header id="auth-modal-header">
       <h1>
-        Sign in <span>to access your list</span>
+        {page} <span>to access your list</span>
       </h1>
     </header>
   );
