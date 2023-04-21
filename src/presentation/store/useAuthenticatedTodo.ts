@@ -2,6 +2,7 @@ import { create } from 'zustand';
 import {
   makeAddTask,
   makeDeleteTask,
+  makeDeleteTasksByIsDone,
   makeEditTask,
   makeReadTasks,
 } from '@/main/factories';
@@ -12,6 +13,7 @@ const fetchUserTasks = makeReadTasks();
 const fetchCreateTask = makeAddTask();
 const fetchEditTask = makeEditTask();
 const fetchDeleteTask = makeDeleteTask();
+const fetchDeleteTasksByIsDone = makeDeleteTasksByIsDone();
 
 let userData = useAuth.getState().userData;
 useAuth.subscribe((state) => {
@@ -114,14 +116,11 @@ const useAuthenticatedTodo = create<TodoStore>((set, get) => ({
   },
 
   removeAllTasksByState: async (isDone) => {
-    const removedTasksFromList = get().taskList.filter(
-      (task) => task.description === '' || task.isDone !== isDone
-    );
-
-    set((store) => ({
-      ...store,
-      taskList: [...removedTasksFromList],
-    }));
+    await fetchDeleteTasksByIsDone.delete({
+      userId: Number(userData.id),
+      isDone,
+    });
+    await get().fetch();
   },
 }));
 
