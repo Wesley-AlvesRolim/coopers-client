@@ -1,0 +1,81 @@
+#auth-modal {
+  position: absolute;
+}
+
+#auth-modal > div > div.pure-modal {
+  width: min(90vw, 932px);
+}
+
+#auth-modal > div > div.pure-modal > .panel {
+  position: relative;
+}
+
+#auth-modal .panel header {
+  width: 100%;
+}
+
+#auth-modal .panel-body {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+#auth-modal .panel-body img {
+  display: none;
+}
+
+#auth-modal .panel-body form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+#auth-modal .panel-body form label {
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+#auth-modal .panel-body form > p > button {
+  border: 0;
+  background-color: transparent;
+  color: var(--green-500);
+}
+
+.pure-modal .close {
+  width: auto;
+  background-color: transparent;
+  color: var(--black);
+  font-weight: 700;
+  font-size: 1.25rem;
+  position: absolute;
+  top: 23px;
+  right: 23px;
+}
+
+@media (min-width: 768px) {
+  #auth-modal .panel-body {
+    width: min(90vw, 932px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #auth-modal .panel-body {
+    padding: 76px 52px;
+  }
+
+  #auth-modal .panel-body img {
+    display: block;
+  }
+
+  #auth-modal .panel-body header {
+    margin: 0;
+    align-self: center;
+    grid-column-start: 2;
+    grid-column-end: 4;
+  }
+
+  #auth-modal .panel-body form {
+    grid-column-start: 2;
+    grid-column-end: 3;
+  }
+}

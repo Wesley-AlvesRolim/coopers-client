@@ -1,0 +1,45 @@
+.task {
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.task .checkbox-wrapper {
+  align-self: center;
+}
+
+.task .task-description {
+  padding: 0.5rem;
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 24px;
+  border: none;
+}
+
+.task button {
+  border: none;
+  background: transparent;
+  font-weight: 700;
+  color: var(--gray-500);
+  justify-self: flex-end;
+  grid-column: 2;
+  opacity: 0;
+  transition: ease 0.5s;
+}
+
+.task:is(:hover, :focus-within) button {
+  opacity: 1;
+}
+
+@media (min-width: 768px) {
+  .task {
+    grid-template-columns: 30px repeat(2, 1fr);
+    grid-template-rows: 1fr;
+  }
+
+  .task button {
+    justify-self: flex-start;
+    grid-column: 3;
+  }
+}
