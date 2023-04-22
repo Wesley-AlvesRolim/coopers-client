@@ -1,0 +1,11 @@
+#auth-modal-header h1 {
+  font-size: 5rem;
+}
+
+#auth-modal-header h1 span {
+  display: block;
+  font-weight: 400;
+  font-size: 3.125rem;
+  color: var(--green-500);
+  word-break: break-word;
+}

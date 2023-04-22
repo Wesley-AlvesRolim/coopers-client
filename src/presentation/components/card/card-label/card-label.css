@@ -1,0 +1,9 @@
+.card-label {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--blue-gray-500);
+  border-radius: 16px;
+  color: var(--blue-gray-500);
+  font-family: var(--font-soleil-regular);
+  display: grid;
+  place-items: center;
+}
