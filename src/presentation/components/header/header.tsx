@@ -40,7 +40,12 @@ const Header = (): JSX.Element => {
           sign out
         </Button>
       ) : (
-        <Button variant="black" onClick={openModal} size="small">
+        <Button
+          variant="black"
+          onClick={openModal}
+          size="small"
+          data-testid="open-login-modal"
+        >
           sign in
         </Button>
       )}

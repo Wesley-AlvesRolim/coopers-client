@@ -16,14 +16,20 @@ const AuthModalRegister = ({
     <>
       <AuthModalHeader page="Sign up" />
       <form onSubmit={handleSubmit}>
-        <InputWithLabel label="User:" required {...register('username')} />
+        <InputWithLabel
+          label="User:"
+          required
+          data-testid="username-register-input"
+          {...register('username')}
+        />
         <InputWithLabel
           label="Password:"
           type="password"
           required
+          data-testid="password-register-input"
           {...register('password')}
         />
-        <Button>Sign up</Button>
+        <Button data-testid="sign-up-button">Sign up</Button>
         <p>
           Do you have a account?{' '}
           <button type="button" onClick={changeScreen}>
